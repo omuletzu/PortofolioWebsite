@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:portofolio_website/GlobalValues.dart';
 import 'package:portofolio_website/HomePage.dart';
 import 'AboutMePage.dart';
 import 'ProjectsPage.dart';
@@ -35,6 +36,8 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
 
     final double width = MediaQuery.of(context).size.width;
 
+    GlobalValues.widthLower = (width > 600);
+
     projectsButton = InkWell(
       onTap: () {
         setState(() {
@@ -49,11 +52,11 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
       },
 
       borderRadius: BorderRadius.all(Radius.circular(width * 0.02)),
-      splashColor: Color.fromARGB(255, 178, 2, 222),
+      splashColor: const Color.fromARGB(255, 178, 2, 222),
       highlightColor: Colors.purple.withOpacity(0.1),
 
       child: Padding(padding: EdgeInsets.all(width * 0.01),
-        child: Text('Projects', style: GoogleFonts.courierPrime(fontSize: width * 0.015)),
+        child: Text('Projects', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.035)),
       ),
     );
 
@@ -71,7 +74,7 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
             ])  
           ),
         ),
-        title: Padding(padding: EdgeInsets.only(top: width * 0.01),
+        title: Padding(padding: EdgeInsets.only(top: GlobalValues.widthLower ? width * 0.01 : width * 0.025),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -96,7 +99,7 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                     highlightColor: Colors.purple.withOpacity(0.1),
 
                     child: Padding(padding: EdgeInsets.all(width * 0.01),
-                      child: Text('Home', style: GoogleFonts.courierPrime(fontSize: width * 0.015)),
+                      child: Text('Home', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.035)),
                     ),
                   ),
                 ),
@@ -130,7 +133,7 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                     highlightColor: Colors.purple.withOpacity(0.1),
 
                     child: Padding(padding: EdgeInsets.all(width * 0.01),
-                      child: Text('About me', style: GoogleFonts.courierPrime(fontSize: width * 0.015)),
+                      child: Text('About me', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.035)),
                     ),
                   ),
                 ),
@@ -178,7 +181,7 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                     highlightColor: Colors.purple.withOpacity(0.1),
 
                     child: Padding(padding: EdgeInsets.all(width * 0.01),
-                      child: Text('Contact', style: GoogleFonts.courierPrime(fontSize: width * 0.015)),
+                      child: Text('Contact', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.035)),
                     ),
                   ),
                 ),

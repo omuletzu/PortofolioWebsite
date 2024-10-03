@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:portofolio_website/GlobalValues.dart';
 
 class SkillSquare extends StatelessWidget{
   final String imageAssetPath;
@@ -23,15 +24,15 @@ class SkillSquare extends StatelessWidget{
     return Padding(padding: EdgeInsets.all(width * 0.045),
       child: Container(
         decoration: BoxDecoration(
-          color: Color.fromRGBO(222, 230, 232, 0.943),
+          color: const Color.fromRGBO(222, 230, 232, 0.943),
           borderRadius: BorderRadius.circular(50),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(imageAssetPath, height: 50, width: 50),
+            Image.asset(imageAssetPath, height: GlobalValues.widthLower ? width * 0.04 : width * 0.15, width: GlobalValues.widthLower ? width * 0.04 : width * 0.15),
             SizedBox(height: height * 0.01),
-            Text(labelFinal, style: GoogleFonts.courierPrime(fontSize: width * 0.013), textAlign: TextAlign.center)
+            Text(labelFinal, style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.01 : width * 0.025), textAlign: TextAlign.center)
           ],
         ),
       )

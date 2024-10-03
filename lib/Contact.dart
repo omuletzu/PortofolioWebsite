@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:portofolio_website/GlobalValues.dart';
 import 'dart:html' as html;
 import 'package:url_launcher/url_launcher.dart';
 
@@ -45,6 +46,8 @@ class _Contact extends State<Contact> with TickerProviderStateMixin{
     final double width = MediaQuery.of(context).size.width;
     final double height= MediaQuery.of(context).size.height;
 
+    GlobalValues.widthLower = (width > 600);
+
     return SingleChildScrollView(
       child: Container(
         constraints: BoxConstraints(
@@ -69,7 +72,7 @@ class _Contact extends State<Contact> with TickerProviderStateMixin{
                     'Contact',
                     speed: const Duration(milliseconds: 250),
                     textStyle: GoogleFonts.courierPrime(
-                      fontSize: width * 0.02,
+                      fontSize: GlobalValues.widthLower ? width * 0.02 : width * 0.055,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -87,69 +90,86 @@ class _Contact extends State<Contact> with TickerProviderStateMixin{
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Row(
+                    Flex(
+                      direction: GlobalValues.widthLower ? Axis.horizontal : Axis.vertical,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SlideTransition(
                           position: _offsetLeft,
-                          child: Image.asset('assets/github.png', width: width * 0.04, height: width * 0.04)
+                          child: Image.asset(
+                            'assets/github.png', 
+                            width: GlobalValues.widthLower ? width * 0.04 : width * 0.1,
+                            height: GlobalValues.widthLower ? width * 0.04 : width * 0.15,
+                          )
                         ),
                         SizedBox(width: width * 0.05),
                         SlideTransition(
                           position: _offsetRight,
                           child: TextButton(onPressed: () {
                             html.window.open('https://github.com/omuletzu?tab=repositories', 'Git');
-                          }, child: Text('github.com/omuletzu', style: GoogleFonts.courierPrime(fontSize: width * 0.015, color: Colors.purple, fontWeight: FontWeight.bold))), 
+                          }, child: Text('github.com/omuletzu', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.035, color: Colors.purple, fontWeight: FontWeight.bold), textAlign: TextAlign.center)), 
                         )
                       ],
                     ),
 
                     SizedBox(height: height * 0.05),
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                    Flex(
+                      direction: GlobalValues.widthLower ? Axis.horizontal : Axis.vertical,
                       children: [
                         SlideTransition(
                           position: _offsetLeft,
-                          child: Image.asset('assets/linkdn.png', width: width * 0.04, height: width * 0.04),
+                          child: Image.asset(
+                            'assets/linkdn.png', 
+                            width: GlobalValues.widthLower ? width * 0.04 : width * 0.1,
+                            height: GlobalValues.widthLower ? width * 0.04 : width * 0.15,
+                          ),
                         ),
                         SizedBox(width: width * 0.05),
                         SlideTransition(
                           position: _offsetRight,
                             child: TextButton(onPressed: () {
                             html.window.open('https://www.linkedin.com/in/mihnea-simota-155829213/', 'Linkedin');
-                          }, child: Text('linkedin.com/in/mihnea-simota-155829213/', style: GoogleFonts.courierPrime(fontSize: width * 0.015, color: Colors.purple, fontWeight: FontWeight.bold))),
+                          }, child: Text('linkedin.com/in/mihnea-simota-155829213/', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.035, color: Colors.purple, fontWeight: FontWeight.bold), textAlign: TextAlign.center)),
                         )
                       ],
                     ),
 
                     SizedBox(height: height * 0.05),
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                    Flex(
+                      direction: GlobalValues.widthLower ? Axis.horizontal : Axis.vertical,
                       children: [
                         SlideTransition(
                           position: _offsetLeft,
-                          child: Image.asset('assets/discord.png', width: width * 0.04, height: width * 0.04),
+                          child: Image.asset(
+                            'assets/discord.png', 
+                            width: GlobalValues.widthLower ? width * 0.04 : width * 0.1,
+                            height: GlobalValues.widthLower ? width * 0.04 : width * 0.15,
+                          ),
                         ),
                         SizedBox(width: width * 0.05),
                         SlideTransition(
                           position: _offsetRight,
                           child: TextButton(onPressed: () {
                             html.window.open('https://discordapp.com/users/490189803833524254', 'Discord');
-                          }, child: Text('discordapp.com/users/490189803833524254', style: GoogleFonts.courierPrime(fontSize: width * 0.015, color: Colors.purple, fontWeight: FontWeight.bold))),
+                          }, child: Text('discordapp.com/users/490189803833524254', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.035, color: Colors.purple, fontWeight: FontWeight.bold), textAlign: TextAlign.center)),
                         )
                       ],
                     ),
 
                     SizedBox(height: height * 0.05),
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                    Flex(
+                      direction: GlobalValues.widthLower ? Axis.horizontal : Axis.vertical,
                       children: [
                         SlideTransition(
                           position: _offsetLeft,
-                          child: Image.asset('assets/mail.png', width: width * 0.04, height: width * 0.04), 
+                          child: Image.asset(
+                            'assets/mail.png', 
+                            width: GlobalValues.widthLower ? width * 0.04 : width * 0.1,
+                            height: GlobalValues.widthLower ? width * 0.04 : width * 0.15,
+                          ), 
                         ),
                         SizedBox(width: width * 0.05),
                         SlideTransition(
@@ -159,7 +179,7 @@ class _Contact extends State<Contact> with TickerProviderStateMixin{
                             final Uri uri = Uri(scheme: 'mailto', path: 'mihneasimota1234@gmail.com');
                             launchUrl(uri);
 
-                          }, child: Text('mihneasimota1234@gmail.com', style: GoogleFonts.courierPrime(fontSize: width * 0.015, color: Colors.purple, fontWeight: FontWeight.bold))), 
+                          }, child: Text('mihneasimota1234@gmail.com', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.035, color: Colors.purple, fontWeight: FontWeight.bold), textAlign: TextAlign.center)), 
                         )
                       ],
                     )
@@ -172,7 +192,7 @@ class _Contact extends State<Contact> with TickerProviderStateMixin{
 
             SlideTransition(
               position: _offsetBT,
-              child: Text('> LET\'S GET IN TOUCH <', style: GoogleFonts.courierPrime(fontSize: width * 0.015)),
+              child: Text('> LET\'S GET IN TOUCH <', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.035)),
             )
           ],
         ),

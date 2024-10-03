@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:html' as html;
 
+import 'package:portofolio_website/GlobalValues.dart';
+
 class ProjectSquare extends StatelessWidget{
 
   final String name;
@@ -20,29 +22,29 @@ class ProjectSquare extends StatelessWidget{
       padding: EdgeInsets.all(width * 0.025),
       child: Container(
         decoration: BoxDecoration(
-          color: Color.fromRGBO(222, 230, 232, 0.943),
+          color: const Color.fromRGBO(222, 230, 232, 0.943),
           borderRadius: BorderRadius.circular(50),
         ),
 
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(name, style: GoogleFonts.courierPrime(fontSize: width * 0.015, color: Colors.purple, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+            Text(name, style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.0165 : width * 0.0425, color: Colors.purple, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('lang: ', style: GoogleFonts.courierPrime(fontSize: width * 0.015, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-                Text('${langs.join(', ')}', style: GoogleFonts.courierPrime(fontSize: width * 0.015), textAlign: TextAlign.center),
+                Text('lang: ', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.04, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+                Text('${langs.join(', ')}', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.04), textAlign: TextAlign.center),
               ],
             ),
             Padding(padding: EdgeInsets.all(width * 0.01),
-              child: Text(descript, style: GoogleFonts.courierPrime(fontSize: width * 0.015), textAlign: TextAlign.center),
+              child: Text(descript, style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.04), textAlign: TextAlign.center),
             ),
             TextButton(onPressed: () {
 
               html.window.open(gitlink, 'Git');
 
-            }, child: Text('> view <', style: GoogleFonts.courierPrime(fontSize: width * 0.015)))
+            }, child: Text('> view <', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.04)))
           ],
         ),
       )

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:portofolio_website/GlobalValues.dart';
 import 'package:portofolio_website/ProjectSquare.dart';
 
 class ProjectsPage extends StatefulWidget{
@@ -35,6 +36,8 @@ class _ProjectsPage extends State<ProjectsPage> with TickerProviderStateMixin{
     final double width = MediaQuery.of(context).size.width;
     final double height= MediaQuery.of(context).size.height;
 
+    GlobalValues.widthLower = (width > 600);
+
     return SingleChildScrollView(
       child: Container(
         constraints: BoxConstraints(
@@ -53,14 +56,15 @@ class _ProjectsPage extends State<ProjectsPage> with TickerProviderStateMixin{
         child: Column(
           children: [
 
-            Padding(padding: EdgeInsets.all(width * 0.025),
+            Padding(
+              padding: EdgeInsets.all(width * 0.025),
               child: AnimatedTextKit(
                 animatedTexts: [
                   TypewriterAnimatedText(
                     'Projects',
                     speed: const Duration(milliseconds: 250),
                     textStyle: GoogleFonts.courierPrime(
-                      fontSize: width * 0.02,
+                      fontSize: GlobalValues.widthLower ? width * 0.02 : width * 0.055,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -71,7 +75,7 @@ class _ProjectsPage extends State<ProjectsPage> with TickerProviderStateMixin{
 
             Padding(
               padding: EdgeInsets.all(width * 0.02),
-              child: Text('> REPOS ARE ON MY GITHUB ACCOUNT <', style: GoogleFonts.courierPrime(fontSize: width * 0.015)),
+              child: Text('> REPOS ARE ON MY GITHUB ACCOUNT <', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.035)),
             ),
 
             FadeTransition(
@@ -79,11 +83,11 @@ class _ProjectsPage extends State<ProjectsPage> with TickerProviderStateMixin{
               child: SizedBox(
                 width: width * 0.75,
                 child: GridView.count(
-                  crossAxisCount: 3,
+                  crossAxisCount: GlobalValues.widthLower ? 3 : 1,
                   shrinkWrap: true,
                   children: [
                     ProjectSquare(name: 'RandomChain', langs: ['Dart'], gitlink: 'https://github.com/omuletzu/RandomChain', descript: 'Engaging social app where people contribute to themed chains'),
-                    ProjectSquare(name: 'DangerMap', langs: ['Dart', 'Kotlin'], gitlink: 'https://github.com/omuletzu/DangerMap', descript: 'App that alerts user of dangers placed on map when close, using Google Map API'),
+                    ProjectSquare(name: 'DangerMap', langs: ['Dart', 'Kotlin'], gitlink: 'https://github.com/omuletzu/DangerMap', descript: 'App that alerts user of dangers placed on map when closed'),
                     ProjectSquare(name: 'ArtHub', langs: ['Kotlin', 'XML'], gitlink: 'https://github.com/omuletzu/ArtHub', descript: 'A social app for sharing pieces of art'),
                     ProjectSquare(name: 'Langus', langs: ['Kotlin', 'XML'], gitlink: 'https://github.com/omuletzu/Langus', descript: 'Language learning app'),
                     ProjectSquare(name: 'Snake Game ASM', langs: ['Assembly'], gitlink: 'https://github.com/omuletzu/Snake-Game-ASM', descript: 'Snake game made in Assembly'),

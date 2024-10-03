@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:portofolio_website/GlobalValues.dart';
 import 'package:portofolio_website/SkillSquare.dart';
 import 'dart:html' as html;
 import 'package:visibility_detector/visibility_detector.dart';
@@ -117,6 +119,83 @@ class _AboutMePage extends State<AboutMePage> with TickerProviderStateMixin{
     final double width = MediaQuery.of(context).size.width;
     final double height= MediaQuery.of(context).size.height;
 
+    List<Widget> listForDetails = [
+      SlideTransition(
+        position: _offsetLeftIntro,
+        child: AnimatedBuilder(
+          animation: _animationControllerImage,
+          builder: (context, child) {
+            
+            return Transform.translate(
+              offset: Offset(0, _offsetImage.value),
+              child: Container(
+                constraints: BoxConstraints(
+                  minHeight: GlobalValues.widthLower ? width * 0.125 : width * 0.4,
+                  minWidth: GlobalValues.widthLower ? width * 0.125 : width * 0.4,
+                  maxHeight: GlobalValues.widthLower ? width * 0.125 : width * 0.4,
+                  maxWidth: GlobalValues.widthLower ? width * 0.125 : width * 0.4,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(width * 0.05)),
+                  border: const Border(bottom: BorderSide(color: Colors.purpleAccent, width: 5)),
+                  color: Colors.purple.withOpacity(0.025),
+                  image: const DecorationImage(
+                    image: AssetImage('assets/file.png'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+
+      SizedBox(width: width * 0.05, height: width * 0.05),
+
+      Column(
+        //mainAxisAlignment: GlobalValues.widthLower ? MainAxisAlignment.start : MainAxisAlignment.center,
+        crossAxisAlignment: GlobalValues.widthLower ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+        children: [
+
+          Padding(
+            padding: EdgeInsets.all(width * 0.01),
+            child: SlideTransition(
+              position: _offsetRightIntro,
+              child: Text(
+                '> Simota Mihnea',
+                style: GoogleFonts.courierPrime(
+                  textStyle: TextStyle(
+                    fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.055,
+                    color: const Color.fromARGB(255, 178, 2, 222),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                textAlign: TextAlign.center
+              )
+            ),
+          ),
+
+          Padding(
+            padding: EdgeInsets.all(width * 0.01),
+            child: SlideTransition(
+              position: _offsetRightIntro,
+              child: Text('> 3rd year Computer Science student at\nTechnical University of Cluj-Napoca', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.035), textAlign: TextAlign.center)
+            ),
+          ),
+
+          Padding(
+            padding: EdgeInsets.all(width * 0.01),
+            child: SlideTransition(
+              position: _offsetRightIntro,
+              child: Text('> Full Stack Developer working on mobile apps, websites and java apps', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.035), textAlign: TextAlign.center)
+            ),
+          )
+        ],
+      )
+    ];
+
+    GlobalValues.widthLower = (width > 600);
+
     bool techVisible = false;
     bool techVisibleIcons = false;
 
@@ -143,14 +222,14 @@ class _AboutMePage extends State<AboutMePage> with TickerProviderStateMixin{
 
         child: Column(
           children: [
-            Padding(padding: EdgeInsets.all(width * 0.025),
+            Padding(padding: EdgeInsets.all(GlobalValues.widthLower ? width * 0.025 : width * 0.05),
               child: AnimatedTextKit(
                 animatedTexts: [
                   TypewriterAnimatedText(
                     'About me',
                     speed: const Duration(milliseconds: 250),
                     textStyle: GoogleFonts.courierPrime(
-                      fontSize: width * 0.02,
+                      fontSize: GlobalValues.widthLower ? width * 0.02 : width * 0.055,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -161,83 +240,17 @@ class _AboutMePage extends State<AboutMePage> with TickerProviderStateMixin{
 
             SizedBox(height: height * 0.05),
 
-            Row(
+            GlobalValues.widthLower
+            ? Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SlideTransition(
-                  position: _offsetLeftIntro,
-                  child: AnimatedBuilder(
-                    animation: _animationControllerImage,
-                    builder: (context, child) {
-                      
-                      return Transform.translate(
-                        offset: Offset(0, _offsetImage.value),
-                        child: Container(
-                          constraints: BoxConstraints(
-                            minHeight: width * 0.125,
-                            minWidth: width * 0.125,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(width * 0.05)),
-                            border: const Border(bottom: BorderSide(color: Colors.purpleAccent, width: 5)),
-                            color: Colors.purple.withOpacity(0.025),
-                            image: const DecorationImage(
-                              image: AssetImage('assets/file.png'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-
-                SizedBox(width: width * 0.05),
-
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-
-                    Container(
-                      width: width * 0.5,
-                      height: width * 0.1,
-                      child: SlideTransition(
-                        position: _offsetRightIntro,
-                        child: Text(
-                          '> Simota Mihnea',
-                          style: GoogleFonts.courierPrime(
-                            textStyle: TextStyle(
-                              fontSize: width * 0.015,
-                              color: const Color.fromARGB(255, 178, 2, 222),
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          textAlign: TextAlign.center
-                        ))
-                    ),
-
-                    Container(
-                      width: width * 0.5,
-                      height: width * 0.1,
-                      child: SlideTransition(
-                        position: _offsetRightIntro,
-                        child: Text('> 3rd year Computer Science student at\nTechnical University of Cluj-Napoca', style: GoogleFonts.courierPrime(fontSize: width * 0.015), textAlign: TextAlign.center)
-                      )
-                    ),
-
-                    Container(
-                      width: width * 0.5,
-                      height: width * 0.1,
-                      child: SlideTransition(
-                        position: _offsetRightIntro,
-                        child: Text('> Full Stack Developer working on mobile apps, websites and java apps', style: GoogleFonts.courierPrime(fontSize: width * 0.015), textAlign: TextAlign.center)
-                      )
-                    )
-                  ],
-                )
-              ],
+              children: listForDetails
+            )
+            : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: listForDetails
             ),
+
+            SizedBox(height: width * 0.05),
 
             VisibilityDetector(
               key: const Key('tech'), 
@@ -260,13 +273,17 @@ class _AboutMePage extends State<AboutMePage> with TickerProviderStateMixin{
                     position: _offsetLeftTech,
                     child: Padding(
                       padding: EdgeInsets.all(width * 0.025),
-                      child: Text('Technical skills', style: GoogleFonts.courierPrime(fontSize: width * 0.02, fontWeight: FontWeight.bold)),
+                      child: Text('Technical skills', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.02 : width * 0.055, fontWeight: FontWeight.bold)),
                     )
                   ),
                   
                   SlideTransition(
                     position: _offsetRightTech,
-                    child: Image.asset('assets/tech.png', height: width * 0.05, width: width * 0.05)
+                    child: Image.asset(
+                      'assets/tech.png', 
+                      height: GlobalValues.widthLower ? width * 0.05 : width * 0.1, 
+                      width: GlobalValues.widthLower ? width * 0.05 : width * 0.1
+                    )
                   )
                 ],
               ), 
@@ -292,7 +309,7 @@ class _AboutMePage extends State<AboutMePage> with TickerProviderStateMixin{
                 child: SizedBox(
                   width: width * 0.75,
                   child: GridView.count(
-                    crossAxisCount: 4,
+                    crossAxisCount: GlobalValues.widthLower ? 4 : 2,
                     shrinkWrap: true,
                     children: [
                       SkillSquare(imageAssetPath: 'assets/java.png', label: 'Java', experience: 2),
@@ -312,15 +329,26 @@ class _AboutMePage extends State<AboutMePage> with TickerProviderStateMixin{
               )
             ),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('> All of the above were used in work that is found in section', style: GoogleFonts.courierPrime(fontSize: width * 0.015)),
-                TextButton(onPressed: () {
-                  widget.projectsOnTap();
-                }, child: Text('Projects', style: GoogleFonts.courierPrime(fontSize: width * 0.015))),
-                Text('<', style: GoogleFonts.courierPrime(fontSize: width * 0.015)),
-              ],
+            Padding(
+              padding: EdgeInsets.all(width * 0.025),
+              child: Flex(
+                mainAxisAlignment: MainAxisAlignment.center,
+                direction: GlobalValues.widthLower ? Axis.horizontal : Axis.vertical,
+                children: [
+                  Visibility(
+                    visible: GlobalValues.widthLower,
+                    child: Text('> ', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.035))
+                  ),
+                  Text('All of the above were used in work that is found in section', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.035), textAlign: TextAlign.center),
+                  TextButton(onPressed: () {
+                    widget.projectsOnTap();
+                  }, child: Text('Projects', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.035))),
+                  Visibility(
+                    visible: GlobalValues.widthLower,
+                    child: Text('<', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.035))
+                  ),
+                ],
+              ),
             ),
 
             SizedBox(height: height * 0.05),
@@ -346,13 +374,17 @@ class _AboutMePage extends State<AboutMePage> with TickerProviderStateMixin{
                     position: _offsetLeftSoft,
                     child: Padding(
                       padding: EdgeInsets.all(width * 0.025),
-                      child: Text('Soft skills', style: GoogleFonts.courierPrime(fontSize: width * 0.02, fontWeight: FontWeight.bold)),
+                      child: Text('Soft skills', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.02 : width * 0.055, fontWeight: FontWeight.bold)),
                     )
                   ),
                   
                   SlideTransition(
                     position: _offsetRightSoft,
-                    child: Image.asset('assets/soft.png', height: width * 0.05, width: width * 0.05)
+                    child: Image.asset(
+                      'assets/soft.png', 
+                      height: GlobalValues.widthLower ? width * 0.05 : width * 0.1, 
+                      width: GlobalValues.widthLower ? width * 0.05 : width * 0.1
+                    )
                   )
                 ],
               ), 
@@ -375,41 +407,57 @@ class _AboutMePage extends State<AboutMePage> with TickerProviderStateMixin{
               },
               child: FadeTransition(
                 opacity: _opacitySoft,
-                child: Container(
+                child: SizedBox(
                   width: width * 0.85,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text('> Communication: ', style: GoogleFonts.courierPrime(fontSize: width * 0.015, fontWeight: FontWeight.bold)),
-                          Text('I find it very easy to have a conversation or to share a laugh with anyone', style: GoogleFonts.courierPrime(fontSize: width * 0.015))
-                        ],
+                      Padding(
+                        padding: EdgeInsets.all(GlobalValues.widthLower ? width * 0 : width * 0.02),
+                        child: Flex(
+                          direction: GlobalValues.widthLower ? Axis.horizontal : Axis.vertical,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text('> Communication: ', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.035, fontWeight: FontWeight.bold)),
+                            Text('I find it very easy to have a conversation or to share a laugh with anyone', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.035), textAlign: TextAlign.center)
+                          ],
+                        ),
                       ),
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text('> Teamwork: ', style: GoogleFonts.courierPrime(fontSize: width * 0.015, fontWeight: FontWeight.bold)),
-                          Text('For me this skill has proven to be the most effective', style: GoogleFonts.courierPrime(fontSize: width * 0.015))
-                        ],
+                      Padding(
+                        padding: EdgeInsets.all(GlobalValues.widthLower ? width * 0 : width * 0.02),
+                        child: Flex(
+                          direction: GlobalValues.widthLower ? Axis.horizontal : Axis.vertical,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text('> Teamwork: ', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.035, fontWeight: FontWeight.bold)),
+                            Text('For me this skill has proven to be the most effective', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.035), textAlign: TextAlign.center)
+                          ],
+                        ),
                       ),
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text('> Problem-Solving: ', style: GoogleFonts.courierPrime(fontSize: width * 0.015, fontWeight: FontWeight.bold)),
-                          Text('> Funny, but i like problems and especially solving them', style: GoogleFonts.courierPrime(fontSize: width * 0.015))
-                        ],
+                      Padding(
+                        padding: EdgeInsets.all(GlobalValues.widthLower ? width * 0 : width * 0.02),
+                        child: Flex(
+                          direction: GlobalValues.widthLower ? Axis.horizontal : Axis.vertical,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text('> Problem-Solving: ', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.035, fontWeight: FontWeight.bold)),
+                            Text('> Funny, but i like problems and especially solving them', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.035), textAlign: TextAlign.center)
+                          ],
+                        ),
                       ),
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text('> Adaptability: ', style: GoogleFonts.courierPrime(fontSize: width * 0.015, fontWeight: FontWeight.bold)),
-                          Text('> Flexible and able to adapt to new challenges and technologies', style: GoogleFonts.courierPrime(fontSize: width * 0.015))
-                        ],
+                      Padding(
+                        padding: EdgeInsets.all(GlobalValues.widthLower ? width * 0 : width * 0.02),
+                        child: Flex(
+                          direction: GlobalValues.widthLower ? Axis.horizontal : Axis.vertical,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text('> Adaptability: ', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.035, fontWeight: FontWeight.bold)),
+                            Text('> Flexible and able to adapt to new challenges and technologies', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.035), textAlign: TextAlign.center)
+                          ],
+                        ),
                       )
                     ],
                   )
@@ -441,13 +489,13 @@ class _AboutMePage extends State<AboutMePage> with TickerProviderStateMixin{
                     position: _offsetLeftVolunteer,
                     child: Padding(
                       padding: EdgeInsets.all(width * 0.025),
-                      child: Text('Volunteering', style: GoogleFonts.courierPrime(fontSize: width * 0.02, fontWeight: FontWeight.bold)),
+                      child: Text('Volunteering', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.02 : width * 0.055, fontWeight: FontWeight.bold)),
                     )
                   ),
                   
                   SlideTransition(
                     position: _offsetRightVolunteer,
-                    child: Icon(Icons.volunteer_activism, size: width * 0.05)
+                    child: Icon(Icons.volunteer_activism, size: GlobalValues.widthLower ? width * 0.05 : width * 0.08)
                   )
                 ],
               ), 
@@ -475,33 +523,33 @@ class _AboutMePage extends State<AboutMePage> with TickerProviderStateMixin{
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('> I also did volunteering for this organizations: ', style: GoogleFonts.courierPrime(fontSize: width * 0.015)),
+                      Text('> I also did volunteering for this organizations: ', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.035)),
 
                       Row(
                         children: [
-                          Text('\tOSUT ', style: GoogleFonts.courierPrime(fontSize: width * 0.011, fontWeight: FontWeight.bold)),
-                          Text('(The Student Organization of the Technical University of Cluj-Napoca) (2022 - 2023)', style: GoogleFonts.courierPrime(fontSize: width * 0.011)),
+                          Text('\tOSUT ', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.011 : width * 0.03, fontWeight: FontWeight.bold)),
+                          Text('Cluj-Napoca (2022 - 2023)', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.011 : width * 0.03)),
                         ],
                       ),
 
                       Row(
                         children: [
-                          Text('\tAIESEC ', style: GoogleFonts.courierPrime(fontSize: width * 0.011, fontWeight: FontWeight.bold)),
-                          Text('Cluj-Napoca (2024)', style: GoogleFonts.courierPrime(fontSize: width * 0.011)),
+                          Text('\tAIESEC ', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.011 : width * 0.03, fontWeight: FontWeight.bold)),
+                          Text('Cluj-Napoca (2024)', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.011 : width * 0.03)),
                         ],
                       ),
 
                       Row(
                         children: [
-                          Text('\tElectric Castle ', style: GoogleFonts.courierPrime(fontSize: width * 0.011, fontWeight: FontWeight.bold)),
-                          Text('(2024)', style: GoogleFonts.courierPrime(fontSize: width * 0.011))
+                          Text('\tElectric Castle ', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.011 : width * 0.03, fontWeight: FontWeight.bold)),
+                          Text('(2024)', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.011 : width * 0.03))
                         ],
                       ),
 
                       Row(
                         children: [
-                          Text('\tCentral Park Wine Festival ', style: GoogleFonts.courierPrime(fontSize: width * 0.011, fontWeight: FontWeight.bold)),
-                          Text('(2024)', style: GoogleFonts.courierPrime(fontSize: width * 0.011))
+                          Text('\tCentral Park Wine Festival ', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.011 : width * 0.03, fontWeight: FontWeight.bold)),
+                          Text('(2024)', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.011 : width * 0.03))
                         ],
                       )
                     ],
@@ -514,16 +562,24 @@ class _AboutMePage extends State<AboutMePage> with TickerProviderStateMixin{
 
             Padding(
               padding: EdgeInsets.all(width * 0.025),
-              child: Row(
+              child: Flex(
+                direction: GlobalValues.widthLower ? Axis.horizontal : Axis.vertical,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('> Here you can see my', style: GoogleFonts.courierPrime(fontSize: width * 0.02, fontWeight: FontWeight.bold)),
+                  Visibility(
+                    visible: GlobalValues.widthLower,
+                    child: Text('> ', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.02 : width * 0.055, fontWeight: FontWeight.bold))
+                  ),
+                  Text('Here you can see my', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.02 : width * 0.055, fontWeight: FontWeight.bold)),
                   TextButton(onPressed: () {
 
                     html.window.open('/assets/assets/cv_final_mihnea_engleza.pdf', 'CV');
 
-                  }, child: Text('CV', style: GoogleFonts.courierPrime(fontSize: width * 0.02, fontWeight: FontWeight.bold, color: Colors.purple))),
-                  Text(' <', style: GoogleFonts.courierPrime(fontSize: width * 0.02, fontWeight: FontWeight.bold)),
+                  }, child: Text('CV', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.02 : width * 0.055, fontWeight: FontWeight.bold, color: Colors.purple))),
+                  Visibility(
+                    visible: GlobalValues.widthLower,
+                    child: Text(' <', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.02 : width * 0.055, fontWeight: FontWeight.bold))
+                  )
                 ],
               )
             ),

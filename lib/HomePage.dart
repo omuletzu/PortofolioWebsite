@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:portofolio_website/GlobalValues.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
@@ -64,6 +65,75 @@ class _HomePage extends State<HomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
 
+    GlobalValues.widthLower = (width > 600);
+
+    List<Widget> listOfContent = [
+      RichText(
+        textAlign: TextAlign.center,
+        text: TextSpan(
+          text: 'Hello, I am\n',
+          style: GoogleFonts.courierPrime(
+            textStyle: TextStyle(
+              fontSize: GlobalValues.widthLower ? width * 0.025 : width * 0.075,
+            ),
+          ),
+          children: <TextSpan>[
+            TextSpan(
+              text: '</Simota Mihnea>',
+              style: GoogleFonts.courierPrime(
+                textStyle: TextStyle(
+                  fontSize: GlobalValues.widthLower ? width * 0.023 : width * 0.08,
+                  color: const Color.fromARGB(255, 178, 2, 222),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      SizedBox(width: width * 0.05, height: width * 0.05),
+      AnimatedBuilder(
+        animation: _animationControllerImage,
+        builder: (context, child) {
+          
+          return Transform.translate(
+            offset: Offset(0, _offsetImage.value),
+            child: Container(
+              constraints: BoxConstraints(
+                minHeight: GlobalValues.widthLower ? width * 0.125 : width * 0.4,
+                minWidth: GlobalValues.widthLower ? width * 0.125 : width * 0.4,
+                maxHeight: GlobalValues.widthLower ? width * 0.125 : width * 0.4,
+                maxWidth: GlobalValues.widthLower ? width * 0.125 : width * 0.4,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(width * 0.05)),
+                border: const Border(bottom: BorderSide(color: Colors.purpleAccent, width: 5)),
+                color: Colors.purple.withOpacity(0.025),
+                image: const DecorationImage(
+                  image: AssetImage('assets/file.png'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+      SizedBox(width: width * 0.05, height: width * 0.05),
+      AnimatedTextKit(
+        animatedTexts: [
+          TypewriterAnimatedText(
+            'Full Stack Developer',
+            speed: const Duration(milliseconds: 250),
+            textStyle: GoogleFonts.courierPrime(
+              fontSize: GlobalValues.widthLower ? width * 0.02 : width * 0.055,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+        totalRepeatCount: 1,
+      )
+    ];
+
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -77,77 +147,19 @@ class _HomePage extends State<HomePage> with TickerProviderStateMixin {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(
+          GlobalValues.widthLower 
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: listOfContent
+            )
+          : Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  text: 'Hello, I am\n',
-                  style: GoogleFonts.courierPrime(
-                    textStyle: TextStyle(
-                      fontSize: width * 0.025,
-                    ),
-                  ),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: '</Simota Mihnea>',
-                      style: GoogleFonts.courierPrime(
-                        textStyle: TextStyle(
-                          fontSize: width * 0.03,
-                          color: Color.fromARGB(255, 178, 2, 222),
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(width: width * 0.05),
-              AnimatedBuilder(
-                animation: _animationControllerImage,
-                builder: (context, child) {
-                  
-                  return Transform.translate(
-                    offset: Offset(0, _offsetImage.value),
-                    child: Container(
-                      constraints: BoxConstraints(
-                        minHeight: width * 0.125,
-                        minWidth: width * 0.125,
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(width * 0.05)),
-                        border: const Border(bottom: BorderSide(color: Colors.purpleAccent, width: 5)),
-                        color: Colors.purple.withOpacity(0.025),
-                        image: const DecorationImage(
-                          image: AssetImage('assets/file.png'),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-              SizedBox(width: width * 0.05),
-              AnimatedTextKit(
-                animatedTexts: [
-                  TypewriterAnimatedText(
-                    'Full Stack Developer',
-                    speed: const Duration(milliseconds: 250),
-                    textStyle: GoogleFonts.courierPrime(
-                      fontSize: width * 0.02,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-                totalRepeatCount: 1,
-              ),
-            ],
+            children: listOfContent
           ),
           SizedBox(height: width * 0.05),
           Text(
             'Student at Technical University of Cluj-Napoca\n> Computer Science - Year 3 <',
-            style: GoogleFonts.courierPrime(fontSize: width * 0.015),
+            style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.015 : width * 0.03),
             textAlign: TextAlign.center,
           ),
           SizedBox(height: width * 0.05),
@@ -167,9 +179,9 @@ class _HomePage extends State<HomePage> with TickerProviderStateMixin {
                     },
                     icon: Image.asset(
                       'assets/github.png',
-                      width: width * 0.02,
-                      height: width * 0.025,
-                      color: Color.fromARGB(255, 46, 41, 48),
+                      width: GlobalValues.widthLower ? width * 0.02 : width * 0.1,
+                      height: GlobalValues.widthLower ? width * 0.025 : width * 0.15,
+                      color: const Color.fromARGB(255, 46, 41, 48),
                     ),
                   ),
                 ),
@@ -188,9 +200,9 @@ class _HomePage extends State<HomePage> with TickerProviderStateMixin {
                     },
                     icon: Image.asset(
                       'assets/linkdn.png',
-                      width: width * 0.02,
-                      height: width * 0.025,
-                      color: Color.fromARGB(255, 46, 41, 48),
+                      width: GlobalValues.widthLower ? width * 0.02 : width * 0.1,
+                      height: GlobalValues.widthLower ? width * 0.025 : width * 0.15,
+                      color: const Color.fromARGB(255, 46, 41, 48),
                     ),
                   ),
                 ),
@@ -209,9 +221,9 @@ class _HomePage extends State<HomePage> with TickerProviderStateMixin {
                     },
                     icon: Image.asset(
                       'assets/discord.png',
-                      width: width * 0.02,
-                      height: width * 0.025,
-                      color: Color.fromARGB(255, 46, 41, 48),
+                      width: GlobalValues.widthLower ? width * 0.02 : width * 0.1,
+                      height: GlobalValues.widthLower ? width * 0.025 : width * 0.15,
+                      color: const Color.fromARGB(255, 46, 41, 48),
                     ),
                   ),
                 ),
