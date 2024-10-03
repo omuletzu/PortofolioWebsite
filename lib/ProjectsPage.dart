@@ -85,6 +85,7 @@ class _ProjectsPage extends State<ProjectsPage> with TickerProviderStateMixin{
                 child: GridView.count(
                   crossAxisCount: GlobalValues.widthLower ? 3 : 1,
                   shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
                   children: [
                     ProjectSquare(name: 'RandomChain', langs: ['Dart'], gitlink: 'https://github.com/omuletzu/RandomChain', descript: 'Engaging social app where people contribute to themed chains'),
                     ProjectSquare(name: 'DangerMap', langs: ['Dart', 'Kotlin'], gitlink: 'https://github.com/omuletzu/DangerMap', descript: 'App that alerts user of dangers placed on map when closed'),

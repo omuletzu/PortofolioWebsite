@@ -311,6 +311,7 @@ class _AboutMePage extends State<AboutMePage> with TickerProviderStateMixin{
                   child: GridView.count(
                     crossAxisCount: GlobalValues.widthLower ? 4 : 2,
                     shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
                     children: [
                       SkillSquare(imageAssetPath: 'assets/java.png', label: 'Java', experience: 2),
                       SkillSquare(imageAssetPath: 'assets/c.png', label: 'C', experience: 4),
