@@ -92,7 +92,6 @@ class _ProjectsPage extends State<ProjectsPage> with TickerProviderStateMixin{
                     ProjectSquare(name: 'ArtHub', langs: ['Kotlin', 'XML'], gitlink: 'https://github.com/omuletzu/ArtHub', descript: 'A social app for sharing pieces of art'),
                     ProjectSquare(name: 'Langus', langs: ['Kotlin', 'XML'], gitlink: 'https://github.com/omuletzu/Langus', descript: 'Language learning app'),
                     ProjectSquare(name: 'Snake Game ASM', langs: ['Assembly'], gitlink: 'https://github.com/omuletzu/Snake-Game-ASM', descript: 'Snake game made in Assembly'),
-                    ProjectSquare(name: 'SkillBoost', langs: ['Dart'], gitlink: 'https://github.com/omuletzu/SkillBoost', descript: 'Handyman demo app with tutorials'),
                     ProjectSquare(name: 'Chess Game', langs: ['Java'], gitlink: 'https://github.com/omuletzu/Chess-Game-Java', descript: 'Chess game made in Java'),
                     ProjectSquare(name: 'Guitar Autotuner', langs: ['Arduino'], gitlink: 'https://github.com/omuletzu/Guitar-Auto-Tuner-Arduino', descript: 'Guitar autotuner for string'),
                     ProjectSquare(name: 'MIPS Processor 32bit', langs: ['VHDL'], gitlink: 'https://github.com/omuletzu/MIPS-Pipeline-Single-Cycle-32bit', descript: 'Both pipeline and single cycle versions on 32bit'),

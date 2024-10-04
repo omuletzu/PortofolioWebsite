@@ -574,7 +574,7 @@ class _AboutMePage extends State<AboutMePage> with TickerProviderStateMixin{
                   Text('Here you can see my', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.02 : width * 0.055, fontWeight: FontWeight.bold)),
                   TextButton(onPressed: () {
 
-                    html.window.open('/assets/assets/cv_final_mihnea_engleza.pdf', 'CV');
+                    html.window.open('/assets/assets/updated-cv-english.pdf', 'CV');
 
                   }, child: Text('CV', style: GoogleFonts.courierPrime(fontSize: GlobalValues.widthLower ? width * 0.02 : width * 0.055, fontWeight: FontWeight.bold, color: Colors.purple))),
                   Visibility(

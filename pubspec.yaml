@@ -85,7 +85,7 @@ flutter:
     - assets/mail.png
     - assets/tech.png
     - assets/soft.png
-    - assets/cv_final_mihnea_engleza.pdf
+    - assets/updated-cv-english.pdf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
